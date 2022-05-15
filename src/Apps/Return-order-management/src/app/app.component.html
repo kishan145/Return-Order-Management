@@ -1,8 +1,12 @@
 <nb-layout>
-  <nb-layout-header class="nb-layout-header">Awesome Company</nb-layout-header>
-  <div>
-    <a class="navname" routerLink="/home">Home</a>
-  </div>
+  <nb-layout-header>
+    <h4>Awesome Company</h4>
+    <nb-tabset>
+      <nb-tab tabTitle="Home" tabIcon="home-outline" responsive>
+      </nb-tab>
+    </nb-tabset>
+    <button nbButton right status="primary" class="float-right">Login</button>
+    </nb-layout-header>
   <div>
     <router-outlet></router-outlet>
   </div>
