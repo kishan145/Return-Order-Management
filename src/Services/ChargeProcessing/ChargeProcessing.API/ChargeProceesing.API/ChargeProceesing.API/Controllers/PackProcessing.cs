@@ -26,7 +26,7 @@ namespace ChargeProceesing.API.Controllers
 
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public IActionResult GetPackProcessings()
         {
