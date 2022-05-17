@@ -19,6 +19,21 @@ namespace ChargeProceesing.API.Repository
 
         public bool CreatePackProcessing(PackModel packProcessing)
         {
+            var comptype = packProcessing.componentType;
+            var comQuantity =  packProcessing.quantity;
+
+            if(comptype == "Integral")
+            {
+                packProcessing.packageCharges = 100 * comQuantity;
+                packProcessing.deliveryCharges = 200 * comQuantity;
+            }
+            else
+            {
+                packProcessing.packageCharges = 50 * comQuantity;
+                packProcessing.deliveryCharges = 100 * comQuantity;
+            }
+
+            packProcessing.totalCharges = packProcessing.packageCharges + packProcessing.deliveryCharges;
             _db.PackModels.Add(packProcessing);
             return Save();
         }

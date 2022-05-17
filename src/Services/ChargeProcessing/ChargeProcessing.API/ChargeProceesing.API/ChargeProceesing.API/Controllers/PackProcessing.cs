@@ -26,7 +26,6 @@ namespace ChargeProceesing.API.Controllers
 
         }
 
-        //[Authorize]
         [HttpGet]
         public IActionResult GetPackProcessings()
         {
@@ -66,7 +65,6 @@ namespace ChargeProceesing.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            //var obj = _pRepo.CreatePackProcessing(comp);
 
             var packProcessingObj = comp;
             if (!_pRepo.CreatePackProcessing(packProcessingObj))
@@ -74,7 +72,6 @@ namespace ChargeProceesing.API.Controllers
                 ModelState.AddModelError("", $"Something went wrong when saving the record {packProcessingObj.requestId}");
                 return StatusCode(500, ModelState);
             }
-            //return Ok(obj);
                 
             return CreatedAtRoute("GetPackProcessing", new { pId = packProcessingObj.requestId }, packProcessingObj);
         }

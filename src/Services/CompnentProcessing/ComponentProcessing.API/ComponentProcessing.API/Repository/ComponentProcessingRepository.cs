@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ComponentProcessing.API.Data;
 using ComponentProcessing.API.Models;
@@ -31,6 +32,20 @@ namespace ComponentProcessing.API.Repository
 
         public bool CreateComponentProcessing(ComponentProcessingModel componentProcessing)
         {
+   
+            var comType = componentProcessing.componentType;
+            var quantity = componentProcessing.quantity;
+
+            if (comType == "Integral")
+            {
+                componentProcessing.totalCharges =  500;
+                componentProcessing.dateOfDelivery = DateTime.Now.AddDays(5);
+            }
+            else
+            {
+                componentProcessing.totalCharges =  300;
+                componentProcessing.dateOfDelivery = DateTime.Now.AddDays(2);
+            }
             _db.componentProcessings.Add(componentProcessing);
             return Save();
         }
