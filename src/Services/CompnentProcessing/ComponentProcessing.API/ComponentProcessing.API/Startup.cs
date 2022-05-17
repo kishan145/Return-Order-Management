@@ -36,7 +36,7 @@ namespace ComponentProcessing.API
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IComponentProcessingRepository, ComponentProcessingRepository >();
             services.AddAutoMapper(typeof(CPMapppings));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ComponentProcessing.API", Version = "v1" });
@@ -54,7 +54,7 @@ namespace ComponentProcessing.API
             }
 
             app.UseRouting();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
