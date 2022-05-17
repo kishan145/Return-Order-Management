@@ -1,4 +1,5 @@
 
+<!-- LOGIN MODAL -->
 <ng-container *ngIf="oldUser">
   <div #loginModal class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog" role="document">
@@ -27,7 +28,7 @@
   </div>
 </ng-container>
 
-
+<!-- SING-UP MODAL -->
   <ng-container *ngIf="!oldUser">
     <div #signUpModal class="modal modal-signin position-static d-block bg-secondary py-5" tabindex="-1" role="dialog" id="modalSignin" [ngStyle]="{'display':displayStyle2}">
       <div class="modal-dialog" role="document">
