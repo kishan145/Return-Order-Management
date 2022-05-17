@@ -11,7 +11,7 @@ export class LognComponent implements OnInit {
   @ViewChild('signUpModal', {static:false}) popup2:any;
   public loginForm: FormGroup = new FormGroup({});
   public signupForm: FormGroup = new FormGroup({});
-
+  public submitted = false;
   displayStyle = 'none'
   displayStyle2 = 'none'
   public oldUser = true;
@@ -29,17 +29,21 @@ export class LognComponent implements OnInit {
 
   }
   submitNewForm() {
-
+    this.submitted = true
+    if(this.signupForm.invalid){
+      return
+    }
   }
   createAccount() {
     this.displayStyle = 'none';
     this.oldUser = false;
     this.displayStyle2 = 'block';
     this.signupForm = this.fb.group({
-      username: ['',[Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"), Validators.required]],
-      password: ['', [Validators.required, this.patternValidator]],
-      confirmPassword: ['',Validators.required]
+      username: ['',[Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"), Validators.required,Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), this.patternValidator]],
+      confirmPassword: ['',[Validators.required]]
       }, {validator: this.confirmPassword})
+      console.log(this.signupForm, 'form')
   }
 
   patternValidator(c: AbstractControl): ValidationErrors {
