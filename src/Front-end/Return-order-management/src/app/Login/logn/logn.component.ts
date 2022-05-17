@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-logn',
   templateUrl: './logn.component.html',
@@ -12,11 +14,16 @@ export class LognComponent implements OnInit {
   public loginForm: FormGroup = new FormGroup({});
   public signupForm: FormGroup = new FormGroup({});
   public submitted = false;
+  public payload = {}
+  public oldUser = true;
+  public isLoggedIn = false;
   displayStyle = 'none'
   displayStyle2 = 'none'
-  public oldUser = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private loginService: LoginService,
+    private route: Router
+  ) { }
 
   ngOnInit(): void {
     this.displayStyle = 'block'
@@ -26,13 +33,24 @@ export class LognComponent implements OnInit {
   })
   }
   submitForm(){
-
+    this.payload = {username: this.loginForm.value.username, password: this.loginForm.value.password}
+    this.loginService.login(this.payload).subscribe((res)=> {
+      if(res){
+        this.route.navigateByUrl('/home')
+      }
+    })
   }
   submitNewForm() {
     this.submitted = true
     if(this.signupForm.invalid){
       return
     }
+    this.payload = {username: this.signupForm.value.username, password: this.signupForm.value.password}
+    this.loginService.signUp(this.payload).subscribe((res)=> {
+      if(res){
+        this.route.navigateByUrl('/home')
+      }
+    })
   }
   createAccount() {
     this.displayStyle = 'none';
@@ -43,7 +61,7 @@ export class LognComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8), this.patternValidator]],
       confirmPassword: ['',[Validators.required]]
       }, {validator: this.confirmPassword})
-      console.log(this.signupForm, 'form')
+      console.log(this.signupForm.value, 'form')
   }
 
   patternValidator(c: AbstractControl): ValidationErrors {
