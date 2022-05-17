@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ComponentProcessing.API.Controllers
@@ -16,12 +18,15 @@ namespace ComponentProcessing.API.Controllers
     public class ComponentProc : Controller
     {
         private IComponentProcessingRepository _cpRepo;
+        private readonly IHttpClientFactory _clientFactory;
         private readonly IMapper _mapper;
 
-        public ComponentProc(IComponentProcessingRepository cpRepo, IMapper mapper)
+        public ComponentProc(IComponentProcessingRepository cpRepo, IMapper mapper, IHttpClientFactory clientFactory)
         {
             _cpRepo = cpRepo;
             _mapper = mapper;
+            _clientFactory = clientFactory;
+
 
         }
 
@@ -52,18 +57,25 @@ namespace ComponentProcessing.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateComponentProcessing([FromBody] CreateDto compDto)
+        public async Task<IActionResult> CreateComponentProcessingAsync([FromBody] CreateDto compDto)
         {
             if(compDto == null)
             {
                 return BadRequest(ModelState);
             }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            var request = new HttpRequestMessage(HttpMethod.Get, $"http://localhost:5001/api/PackProcessing?comType={compDto.componentType}&quantity={compDto.quantity}");
+            request.Headers.Add("Accept", "application/json");
+            var client = _clientFactory.CreateClient();
+            var response = await client.SendAsync(request);
+            string str = await response.Content.ReadAsStringAsync();
+            GetDto data = JsonSerializer.Deserialize<GetDto>(str);
+            var objNewData = _mapper.Map<GetDto>(data);
+            compDto.packageCharges = objNewData.packageCharges;
+            compDto.deliveryCharges = objNewData.deliveryCharges;
             var componentProcessingObj = _mapper.Map<ComponentProcessingModel>(compDto);
             if(!_cpRepo.CreateComponentProcessing(componentProcessingObj))
             {
@@ -80,7 +92,6 @@ namespace ComponentProcessing.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var componentProcessingObj = _mapper.Map<ComponentProcessingModel>(compDto);
             if (!_cpRepo.UpdateComponentProcessing(componentProcessingObj))
             {
