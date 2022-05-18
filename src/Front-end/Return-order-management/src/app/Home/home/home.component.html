@@ -2,7 +2,113 @@
   <h1>Hi There</h1>
   <div class="mb-5 p-4 bg-white shadow-sm">
     <h3>Process Details</h3>
-    <div
+    <ng-container *ngIf="!step1">
+      <div
+      class="modal modal-sheet position-static d-block py-5"
+      tabindex="-1"
+      role="dialog"
+      id="modalSheet"
+    >
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-4 shadow">
+          <div class="modal-header border-bottom-0">
+          </div>
+          <div class="modal-body py-0">
+            <form [formGroup] = 'step1Form'>
+              <div
+                class="form-row"
+                style="display: flex; justify-content: space-evenly"
+              >
+                <div class="form-group col-md-3">
+                  <label for="inputName">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputName"
+                    placeholder="name"
+                    formControlName='name'
+                  />
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputNumber">Contact Number</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="inputNumber"
+                    placeholder="Number"
+                    formControlName='number'
+                  />
+                </div>
+
+                <div class="form-group col-md-3">
+                  <label for="inlineFormCustomSelectPref">Compnent Type</label>
+                  <select class="form-control" id="inlineFormCustomSelectPref">
+                    <option selected>Select component type</option>
+                    <option value="1">Integral</option>
+                    <option value="2">Accessory</option>
+                  </select>
+                </div>
+              </div>
+
+              <div
+                class="form-row"
+                style="display: flex; justify-content: space-evenly"
+              >
+                <div class="form-group col-md-3">
+                  <label for="inputComName">Component Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputComName"
+                    placeholder="Component Name"
+                    formControlName='Componentname'
+                  />
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputQty">Quantity</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="inputQty"
+                    placeholder="Quantity"
+                    formControlName='quantity'
+                  />
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="inputDesc">Description</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputDesc"
+                    placeholder="Description"
+                    formControlName='description'
+                  />
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inlineFormCustomSelectPref">Status</label>
+                <select class="form-control" id="inlineFormCustomSelectPref">
+                  <option selected value="1"></option>
+                  <option value="1">Unfulfill</option>
+                  <option value="2">fulfill</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer flex-column border-top-0">
+            <button
+              type="button"
+              class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="proceedToNext()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ng-container>
+    
+    <ng-container *ngIf="!step1">
+      <div
       class="modal modal-sheet position-static d-block py-5"
       tabindex="-1"
       role="dialog"
@@ -19,7 +125,7 @@
             ></button>
           </div>
           <div class="modal-body py-0">
-            <form>
+            <form [formGroup] = 'step2Form'>
               <div
                 class="form-row"
                 style="display: flex; justify-content: space-evenly"
@@ -98,14 +204,14 @@
           <div class="modal-footer flex-column border-top-0">
             <button
               type="button"
-              class="btn btn-lg btn-primary w-100 mx-0 mb-2"
-            >
+              class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="save()">
               Save changes
             </button>
             <button
               type="button"
               class="btn btn-lg btn-light w-100 mx-0"
               data-bs-dismiss="modal"
+              (click)="close()"
             >
               Close
             </button>
@@ -113,5 +219,6 @@
         </div>
       </div>
     </div>
+    </ng-container>
   </div>
 </ng-container>
