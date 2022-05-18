@@ -1,128 +1,22 @@
-<ng-container *ngIf="user">
+<ng-container *ngIf="!user">
   <h1>Hi There</h1>
-  <h3>Welcome</h3>
 <div class="mb-5 p-4 bg-white shadow-sm">
   <h3>Process Details</h3>
-  <div id="stepper1" class="bs-stepper linear">
-    <div class="bs-stepper-header" role="tablist">
-      <div class="step active" data-target="#test-l-1">
-        <button
-          type="button"
-          class="step-trigger"
-          role="tab"
-          id="stepper1trigger1"
-          aria-controls="test-l-1"
-          aria-selected="true"
-        >
-          <span class="bs-stepper-circle">1</span>
-          <span class="bs-stepper-label">Provide details for return order </span>
-        </button>
+  <div class="modal modal-sheet position-static d-block py-5" tabindex="-1" role="dialog" id="modalSheet">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header border-bottom-0">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-0">
+          <p>This is a modal sheet, a variation of the modal that docs itself to the bottom of the viewport like the newer share sheets in iOS.</p>
+        </div>
+        <div class="modal-footer flex-column border-top-0">
+          <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2">Save changes</button>
+          <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Close</button>
+        </div>
       </div>
-      <div class="bs-stepper-line"></div>
-      <div class="step" data-target="#test-l-2">
-        <button
-          type="button"
-          class="step-trigger"
-          role="tab"
-          id="stepper1trigger2"
-          aria-controls="test-l-2"
-          aria-selected="false"
-          disabled="disabled"
-        >
-          <span class="bs-stepper-circle">2</span>
-          <span class="bs-stepper-label">View details</span>
-        </button>
-      </div>
-      <div class="bs-stepper-line"></div>
-      <div class="step" data-target="#test-l-3">
-        <button
-          type="button"
-          class="step-trigger"
-          role="tab"
-          id="stepper1trigger3"
-          aria-controls="test-l-3"
-          aria-selected="false"
-          disabled="disabled"
-        >
-          <span class="bs-stepper-circle">3</span>
-          <span class="bs-stepper-label">Validate</span>
-        </button>
-      </div>
-    </div>
-    <div class="bs-stepper-content">
-      <form onsubmit="return false">
-        <div
-          id="test-l-1"
-          role="tabpanel"
-          class="bs-stepper-pane active dstepper-block"
-          aria-labelledby="stepper1trigger1"
-        >
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              placeholder="Enter email"
-            />
-          </div>
-          <button class="btn btn-primary" onclick="stepper1.next()">
-            Next
-          </button>
-        </div>
-        <div
-          id="test-l-1"
-          role="tabpanel"
-          class="bs-stepper-pane active dstepper-block"
-          aria-labelledby="stepper1trigger1"
-        >
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              placeholder="Enter email"
-            />
-          </div>
-          <button class="btn btn-primary" onclick="stepper1.next()">
-            Next
-          </button>
-        </div>
-        <div
-          id="test-l-2"
-          role="tabpanel"
-          class="bs-stepper-pane"
-          aria-labelledby="stepper1trigger2"
-        >
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-            />
-          </div>
-          <button class="btn btn-primary" onclick="stepper1.previous()">
-            Previous
-          </button>
-          <button class="btn btn-primary" onclick="stepper1.next()">
-            Next
-          </button>
-        </div>
-        <div
-          id="test-l-3"
-          role="tabpanel"
-          class="bs-stepper-pane text-center"
-          aria-labelledby="stepper1trigger3"
-        >
-          <button class="btn btn-primary mt-5" onclick="stepper1.previous()">
-            Previous
-          </button>
-          <button type="submit" class="btn btn-primary mt-5">Submit</button>
-        </div>
-      </form>
     </div>
   </div>
 </div>

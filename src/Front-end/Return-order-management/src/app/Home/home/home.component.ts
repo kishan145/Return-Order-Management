@@ -10,21 +10,16 @@ import Stepper from 'bs-stepper';
 export class HomeComponent implements OnInit {
   public user = false;
   name = 'Project'
-  private stepper!: Stepper;
   constructor(
     private route: Router
     // private stepper: Stepper
     ) { }
 
   ngOnInit(): void {
+    
     this.user = history.state.isLoggedIn
-    this.stepper = new Stepper(document.querySelector('#stepper1')!, {
-      linear: false,
-      animation: true
-    })
+
   }
 
-  next() {
-    this.stepper.next();
-  }
+  
 }
