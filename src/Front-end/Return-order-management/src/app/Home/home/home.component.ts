@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.step1Form = this.fb.group({
       name: ['', Validators.required],
-      number: ['', Validators.required],
-      statusType: ['', Validators.required],
-      Componentname: ['', Validators.required],
+      contactNumber: ['', Validators.required],
+      status: ['', Validators.required],
+      componentName: ['', Validators.required],
       quantity: ['', Validators.required],
       description: ['', Validators.required],
-      compontType: ['', Validators.required]
+      componentType: ['', Validators.required]
   })
     this.user = history.state.isLoggedIn
     if (this.user){
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   }
   proceedToNext(){
     console.log(this.step1Form.value, 'step1')
-    this.homeService.sendOrderDetails(this.step1Form).subscribe((res) => {
+    this.homeService.sendOrderDetails(this.step1Form.value).subscribe((res) => {
       if(res){
         this.step2Form = this.fb.group({
           rqstid: ['', Validators.required],
