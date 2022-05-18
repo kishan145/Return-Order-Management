@@ -36,7 +36,11 @@ export class LognComponent implements OnInit {
     this.payload = {username: this.loginForm.value.username, password: this.loginForm.value.password}
     this.loginService.login(this.payload).subscribe((res)=> {
       if(res){
-        this.route.navigateByUrl('/home')
+        this.route.navigate(['/home'],{
+          state:{
+            isLoggedIn:this.isLoggedIn
+          }
+        })
       }
     })
   }
@@ -49,7 +53,12 @@ export class LognComponent implements OnInit {
     this.payload = {username: this.signupForm.value.username, password: this.signupForm.value.password}
     this.loginService.signUp(this.payload).subscribe((res)=> {
       if(res){
-        this.route.navigateByUrl('/home')
+        this.isLoggedIn
+        this.route.navigate(['/home'],{
+          state:{
+            isLoggedIn:this.isLoggedIn
+          }
+        })
       }
     })
   }
@@ -65,15 +74,6 @@ export class LognComponent implements OnInit {
       }, {validator: this.confirmPassword})
       console.log(this.signupForm.value, 'form')
   }
-
-  // patternValidator(c: AbstractControl): ValidationErrors {
-  //   if (!c.value) {
-  //     return  {invalidPassword: true};
-  //   }
-  //   const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-  //   const valid = regex.test(c.value);
-  //   return valid ? {invalidPassword: false} : { invalidPassword: true };
-  // };
 
   confirmPassword(c:any): any{
     if(!c.controls.confirmPassword || !c.controls.password){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import Stepper from 'bs-stepper';
 
 @Component({
@@ -7,9 +8,11 @@ import Stepper from 'bs-stepper';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public user = false;
   name = 'Project'
   private stepper!: Stepper;
   constructor(
+    private route: Router
     // private stepper: Stepper
     ) { }
 
@@ -18,6 +21,8 @@ export class HomeComponent implements OnInit {
       linear: false,
       animation: true
     })
+    this.user = history.state.isLoggedIn
+    console.log(history.state,'history')
   }
 
   next() {
