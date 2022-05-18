@@ -9,7 +9,7 @@
       role="dialog"
       id="modalSheet"
     >
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content rounded-4 shadow">
           <div class="modal-header border-bottom-0">
           </div>
@@ -120,7 +120,7 @@
         role="dialog"
         id="modalSheet"
       >
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content rounded-4 shadow">
             <div class="modal-header border-bottom-0">
               <button
@@ -192,14 +192,14 @@
 
                   <div class="form-group col-md-3">
                     <label for="inlineFormCustomSelectPref">Status</label>
-                    <select
-                      class="form-control"
-                      id="inlineFormCustomSelectPref"
-                    >
-                      <option selected value="1"></option>
-                      <option value="1">Unfulfill</option>
-                      <option value="2">fulfill</option>
-                    </select>
+                    <div>
+                      <input id="male" type="radio" value="Unfulfill" name="statusType" formControlName="statusType">
+                      <label for="Unfulfill">Unfulfill</label>
+                    </div>
+                    <div>
+                      <input id="male" type="radio" value="Fulfill" name="statusType" formControlName="statusType">
+                      <label for="Fulfill">Fulfill</label>
+                  </div>
                   </div>
                 </div>
               </form>
