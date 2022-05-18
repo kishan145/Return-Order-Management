@@ -22,17 +22,16 @@ export class LoginService {
   }
 
   setSessionData(authData: any): any{
-    const expiry =  moment().add(authData.expiresIn,'second')
-    console.log(expiry.valueOf(), 'expiry');
+    console.log(authData);
+    // const expiry =  moment().add(authData.expiresIn,'second')
+    // console.log(expiry.valueOf(), 'expiry');
     localStorage.setItem('id_token', authData.token);
-    localStorage.setItem('expiresIn', JSON.stringify(expiry.valueOf()));
+    // localStorage.setItem('expiresIn', JSON.stringify(expiry.valueOf()));
     return authData;
   }
 
   login(body: any): Observable<any> {
     return this.http.post('http://localhost:5002/api/UserAuth/authenticate', body)
-      .pipe(map(res => {
-        this.setSessionData(res);
-      }));
+      .pipe(map(res => ( this.setSessionData(res))));
   }
 }
