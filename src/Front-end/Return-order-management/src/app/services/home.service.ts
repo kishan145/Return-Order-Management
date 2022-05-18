@@ -1,9 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  sendOrderDetails(body:any): Observable<any>{
+    const headers= {'Content-type': 'application/json'}
+    return this.http.post('http://localhost:5000/api/ComponentProc', body, { headers} );
+  }
 }

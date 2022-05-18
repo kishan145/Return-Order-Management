@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import Stepper from 'bs-stepper';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
   public step2Form: FormGroup = new FormGroup({});
   constructor(
     private route: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private homeService: HomeService
     ) { }
 
   ngOnInit(): void {
@@ -36,6 +37,18 @@ export class HomeComponent implements OnInit {
   }
   proceedToNext(){
     console.log(this.step1Form.value, 'step1')
+    this.homeService.sendOrderDetails(this.step1Form).subscribe((res) => {
+      if(res){
+        this.step2Form = this.fb.group({
+          rqstid: ['', Validators.required],
+          nuproChargember: ['', Validators.required],
+          statusType: ['', Validators.required],
+          packCharge: ['', Validators.required],
+          delCharge: ['', Validators.required],
+          dod: ['', Validators.required],
+      })
+      }
+    })
     this.step1 = false;
 
   }
