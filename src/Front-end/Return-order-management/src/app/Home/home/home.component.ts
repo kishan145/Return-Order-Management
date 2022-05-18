@@ -17,12 +17,11 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.user = history.state.isLoggedIn
     this.stepper = new Stepper(document.querySelector('#stepper1')!, {
       linear: false,
       animation: true
     })
-    this.user = history.state.isLoggedIn
-    console.log(history.state,'history')
   }
 
   next() {
