@@ -36,6 +36,7 @@ namespace ComponentProcessing.API
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IComponentProcessingRepository, ComponentProcessingRepository >();
             services.AddAutoMapper(typeof(CPMapppings));
+            services.AddHttpClient();
             services.AddControllers().AddNewtonsoftJson();
             services.AddSwaggerGen(c =>
             {

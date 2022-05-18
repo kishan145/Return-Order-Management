@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ChargeProceesing.API.Models;
 using ChargeProceesing.API.Models.Dtos;
-using ChargeProceesing.API.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,64 +15,23 @@ namespace ChargeProceesing.API.Controllers
     [ApiController]
     public class PackProcessing : ControllerBase
     {
-        private IPackRepository _pRepo;
-        private readonly IMapper _mapper;
-
-        public PackProcessing(IPackRepository pRepo, IMapper mapper)
-        {
-            _pRepo = pRepo;
-            _mapper = mapper;
-
-        }
-
+        //------------------------------------------------------------------------
         [HttpGet]
-        public IActionResult GetPackProcessings()
+        public IActionResult GetPackProcessing([FromQuery] GetDto data)
         {
-            var objList = _pRepo.GetPackProcessings();
 
-            var objDto = new List<PackModelDto>();
-
-            foreach (var obj in objList)
+            if (data.comType == "Integral")
             {
-                objDto.Add(_mapper.Map<PackModelDto>(obj));
+                data.packageCharges = 100 * data.quantity;
+                data.deliveryCharges = 200 * data.quantity;
             }
-            return Ok(objDto);
+            else
+            {
+                data.packageCharges = 50 * data.quantity;
+                data.deliveryCharges = 100 * data.quantity;
+            }
+            return Ok(data);
         }
-
-        [HttpGet("{pId:int}", Name = "GetPackProcessing")]
-        public IActionResult GetPackProcessing(int pId)
-        {
-            var obj = _pRepo.GetPackProcessing(pId);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            var objDto = _mapper.Map<PackModelDto>(obj);
-            return Ok(objDto);
-        }
-
-        [HttpPost]
-        public IActionResult CreatePackProcessing([FromBody] PackModel comp)
-        {
-            
-            if (comp == null)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var packProcessingObj = comp;
-            if (!_pRepo.CreatePackProcessing(packProcessingObj))
-            {
-                ModelState.AddModelError("", $"Something went wrong when saving the record {packProcessingObj.requestId}");
-                return StatusCode(500, ModelState);
-            }
-                
-            return CreatedAtRoute("GetPackProcessing", new { pId = packProcessingObj.requestId }, packProcessingObj);
-        }
+        //--------------------------------------------------------------------------------------
     }
 }
