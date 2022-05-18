@@ -41,6 +41,7 @@ export class LognComponent implements OnInit {
     })
   }
   submitNewForm() {
+    console.log(this.signupForm,'submit')
     this.submitted = true
     if(this.signupForm.invalid){
       return
@@ -53,25 +54,26 @@ export class LognComponent implements OnInit {
     })
   }
   createAccount() {
+    this.loginForm.reset()
     this.displayStyle = 'none';
     this.oldUser = false;
     this.displayStyle2 = 'block';
     this.signupForm = this.fb.group({
-      username: ['',[Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"), Validators.required,Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8), this.patternValidator]],
+      username: ['',[Validators.required,Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['',[Validators.required]]
       }, {validator: this.confirmPassword})
       console.log(this.signupForm.value, 'form')
   }
 
-  patternValidator(c: AbstractControl): ValidationErrors {
-    if (!c.value) {
-      return  {invalidPassword: true};
-    }
-    const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-    const valid = regex.test(c.value);
-    return valid ? {invalidPassword: false} : { invalidPassword: true };
-  };
+  // patternValidator(c: AbstractControl): ValidationErrors {
+  //   if (!c.value) {
+  //     return  {invalidPassword: true};
+  //   }
+  //   const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
+  //   const valid = regex.test(c.value);
+  //   return valid ? {invalidPassword: false} : { invalidPassword: true };
+  // };
 
   confirmPassword(c:any): any{
     if(!c.controls.confirmPassword || !c.controls.password){
@@ -89,5 +91,10 @@ export class LognComponent implements OnInit {
 
   get f(){
     return this.signupForm.controls;
+  }
+
+  close(){
+    this.signupForm.reset();
+    this.oldUser = true
   }
 }
