@@ -13,37 +13,40 @@ export class HomeComponent implements OnInit {
   public step1 = false;
   public step1Form: FormGroup = new FormGroup({});
   public step2Form: FormGroup = new FormGroup({});
-  name = 'Project'
   constructor(
     private route: Router,
     private fb: FormBuilder
     ) { }
 
   ngOnInit(): void {
-    
+    this.step1Form = this.fb.group({
+      name: ['', Validators.required],
+      number: ['', Validators.required],
+      statusType: ['', Validators.required],
+      Componentname: ['', Validators.required],
+      quantity: ['', Validators.required],
+      description: ['', Validators.required],
+      compontType: ['', Validators.required]
+  })
     this.user = history.state.isLoggedIn
     if (this.user){
       this.step1 = true;
-      this.step1Form = this.fb.group({
-        name: ['', Validators.required],
-        number: ['', Validators.required],
-        Componentname: ['', Validators.required],
-        quantity: ['', Validators.required],
-        description: ['', Validators.required],
-
-    })
+      
     }
   }
   proceedToNext(){
+    console.log(this.step1Form.value, 'step1')
     this.step1 = false;
 
   }
+
+
   save(){
 
   }
 
   close(){
-    
+
   }
   
 }

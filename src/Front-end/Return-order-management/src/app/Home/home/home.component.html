@@ -42,11 +42,14 @@
 
                 <div class="form-group col-md-3">
                   <label for="inlineFormCustomSelectPref">Compnent Type</label>
-                  <select class="form-control" id="inlineFormCustomSelectPref">
-                    <option selected>Select component type</option>
-                    <option value="1">Integral</option>
-                    <option value="2">Accessory</option>
-                  </select>
+                  <div>
+                    <input id="male" type="radio" value="Integral" name="compontType" formControlName="compontType">
+                    <label for="Integral">Integral</label>
+                  </div>
+                  <div>
+                    <input id="male" type="radio" value="Accessory" name="compontType" formControlName="compontType">
+                    <label for="Accessory">Accessory</label>
+                </div>
                 </div>
               </div>
 
@@ -87,11 +90,14 @@
               </div>
               <div class="form-group col-md-3">
                 <label for="inlineFormCustomSelectPref">Status</label>
-                <select class="form-control" id="inlineFormCustomSelectPref">
-                  <option selected value="1"></option>
-                  <option value="1">Unfulfill</option>
-                  <option value="2">fulfill</option>
-                </select>
+                <div>
+                  <input id="male" type="radio" value="Unfulfill" name="statusType" formControlName="statusType">
+                  <label for="Unfulfill">Unfulfill</label>
+                </div>
+                <div>
+                  <input id="male" type="radio" value="Fulfill" name="statusType" formControlName="statusType">
+                  <label for="Fulfill">Fulfill</label>
+              </div>
               </div>
             </form>
           </div>
@@ -99,7 +105,7 @@
             <button
               type="button"
               class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="proceedToNext()">
-              Save changes
+              Proceed to Next Step
             </button>
           </div>
         </div>
