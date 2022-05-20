@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
       }
     })
    
-    this.step1 = true;
+    this.step1 = false;
     this.step1Form.reset();
     this.submitted = false;
   }
