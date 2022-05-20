@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
     this.step1Form = this.fb.group({
       name: ['', Validators.required],
       contactNumber: ['', [Validators.required,Validators.minLength(10)]],
-      status: ['', Validators.required],
       componentName: ['', Validators.required],
       quantity: ['', Validators.required],
       description: ['', Validators.required],
@@ -90,11 +89,6 @@ export class HomeComponent implements OnInit {
   get f(){
     return this.step1Form.controls;
   }
-
-
-
-
-
 
   save(){
 

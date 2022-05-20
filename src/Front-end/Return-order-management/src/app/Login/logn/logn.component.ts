@@ -59,12 +59,8 @@ export class LognComponent implements OnInit {
     this.payload = {username: this.signupForm.value.username, password: this.signupForm.value.password}
     this.loginService.signUp(this.payload).subscribe((res)=> {
       if(res){
-        this.isLoggedIn = true
-        this.route.navigate(['/home'],{
-          state:{
-            isLoggedIn:this.isLoggedIn
-          }
-        })
+        this.submitted = false;
+        this.oldUser = true;
       }
     })
   }
