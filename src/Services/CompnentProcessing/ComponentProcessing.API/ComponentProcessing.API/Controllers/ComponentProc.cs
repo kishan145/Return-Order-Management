@@ -52,8 +52,7 @@ namespace ComponentProcessing.API.Controllers
             {
                 return NotFound();
             }
-            var objDto = _mapper.Map<ComponentProcessingModelDto>(obj);
-            return Ok(objDto);
+            return Ok(obj);
         }
 
         [HttpPost]
