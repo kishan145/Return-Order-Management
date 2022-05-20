@@ -15,7 +15,7 @@ namespace ComponentProcessing.API.Repository.IRepository
         bool ComponentProcessingExists(int id);
 
         bool CreateComponentProcessing(ComponentProcessingModel componentProcessing);
-        bool UpdateComponentProcessing(ComponentProcessingModel componentProcessing);
+        bool UpdateComponentProcessing(int cpID,ComponentProcessingModel componentProcessing);
         bool DeleteComponentProcessing(ComponentProcessingModel componentProcessing);
 
         bool Save();
