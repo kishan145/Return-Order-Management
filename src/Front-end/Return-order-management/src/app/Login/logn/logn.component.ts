@@ -48,6 +48,11 @@ export class LognComponent implements OnInit {
         })
         this.submitted =false
       }
+    },(error) => {
+      if (error.status === 400)
+      {
+        alert("Incorrect username or password");
+      }
     })
   }
   submitNewForm() {
@@ -61,6 +66,11 @@ export class LognComponent implements OnInit {
       if(res){
         this.submitted = false;
         this.oldUser = true;
+      }
+    }, (error) => {
+      if (error.status === 400)
+      {
+        alert("User already exists");
       }
     })
   }

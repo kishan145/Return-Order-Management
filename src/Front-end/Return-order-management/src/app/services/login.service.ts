@@ -15,10 +15,10 @@ export class LoginService {
   signUp(body: any): Observable<any>{
     const headers= {'Content-type': 'application/json'}
     return this.http.post('http://localhost:5002/api/UserAuth', body, { headers })
-      .pipe(map(res => {
-        this.setSessionData(res);
+      .pipe(map(res => (
+        this.setSessionData(res)
         // console.log(res.token);
-      }))
+      )))
   }
 
   setSessionData(authData: any): any{
