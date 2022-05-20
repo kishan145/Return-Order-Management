@@ -28,7 +28,7 @@ export class LognComponent implements OnInit {
   ngOnInit(): void {
     this.displayStyle = 'block'
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      username: ['',[Validators.required,Validators.email]],
       password: ['', [Validators.required,Validators.minLength(8)]]
   })
   }
@@ -70,7 +70,7 @@ export class LognComponent implements OnInit {
   }
   createAccount() {
     this.oldUser = false;
-    this.loginForm.reset()
+    // this.loginForm.reset()
     this.displayStyle = 'none';
     this.displayStyle2 = 'block';
     this.signupForm = this.fb.group({

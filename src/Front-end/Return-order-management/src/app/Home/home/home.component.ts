@@ -12,6 +12,7 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeComponent implements OnInit {
   public user = false;
   public step1 = false;
+  public step2 = false;
   public step1Form: FormGroup = new FormGroup({});
   public step2Form: FormGroup = new FormGroup({});
   public readonly = true;
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    console.log(history.state.isLoggedIn, 'history');
     this.user = history.state.isLoggedIn
     if (this.user){
       this.step1 = true;
@@ -38,6 +40,14 @@ export class HomeComponent implements OnInit {
       quantity: ['', Validators.required],
       description: ['', Validators.required],
       componentType: ['', Validators.required],
+    })
+    this.step2Form = this.fb.group({
+      requestId: ['', Validators.required],
+      totalCharges: ['', Validators.required],
+      status: ['', Validators.required],
+      packageCharges: ['', Validators.required],
+      deliveryCharges: ['', Validators.required],
+      dateOfDelivery: ['', Validators.required]
   })
 // const abc = {
 //   "requestId": 24,
@@ -70,17 +80,11 @@ export class HomeComponent implements OnInit {
         this.step2Form.controls['dateOfDelivery'].setValue(this.datePipe.transform(Date.now(),'yyyy-MM-dd'))
       }
     })
-    this.step2Form = this.fb.group({
-      requestId: ['', Validators.required],
-      totalCharges: ['', Validators.required],
-      status: ['', Validators.required],
-      packageCharges: ['', Validators.required],
-      deliveryCharges: ['', Validators.required],
-      dateOfDelivery: ['', Validators.required]
-  })
+   
     this.step1 = false;
+    this.step2 = true;
     this.step1Form.reset();
-    this.submitted = true;
+    this.submitted = false;
   }
 
   get f(){
