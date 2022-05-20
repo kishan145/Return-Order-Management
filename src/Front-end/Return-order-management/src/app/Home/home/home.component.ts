@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
       componentName: ['', Validators.required],
       quantity: ['', Validators.required],
       description: ['', Validators.required],
-      componentType: ['', Validators.required]
+      componentType: ['', Validators.required],
   })
   this.step2Form = this.fb.group({
     requestId: ['', Validators.required],
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     status: ['', Validators.required],
     packageCharges: ['', Validators.required],
     deliveryCharges: ['', Validators.required],
-    dateOfDelivery: ['', Validators.required],
+    dateOfDelivery: ['', [Validators.required]]
 })
 // const abc = {
 //   "requestId": 24,
@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
 // Object.entries(abc).map(item => {
 //   this.step2Form.controls[item[0]].setValue(item[1])
 // })
-this.step2Form.controls['dateOfDelivery'].setValue(this.datePipe.transform(Date.now(),'yyyy-MM-dd'))
 
 // this.readonly = false;
     this.user = history.state.isLoggedIn
