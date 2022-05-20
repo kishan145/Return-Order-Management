@@ -1,0 +1,14 @@
+<div class="table-responsive">
+    <table class="table table-striped table-dark ">
+        <thead>
+          <tr>
+                <th *ngFor="let head of headers" scope="col">{{head}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of datas">
+            <td *ngFor="let value of headers">{{data[value]}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

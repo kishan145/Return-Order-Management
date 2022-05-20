@@ -80,6 +80,11 @@ export class HomeComponent implements OnInit {
     this.homeService.updateStatus(status,this.step2Form.controls['requestId'].value).subscribe((res) => {
       if (status.status === 'Fulfill') {
         alert("Response Updated Successfully");
+        this.route.navigate(['/home'],{
+          state:{
+            requestId:this.step2Form.controls['requestId'].value
+          }
+        })
       } else {
         alert("We are not processing your request,Thankyou for your response");
         this.step1 = true;
