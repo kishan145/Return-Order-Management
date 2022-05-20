@@ -76,7 +76,7 @@ export class LognComponent implements OnInit {
   }
   createAccount() {
     this.oldUser = false;
-    // this.loginForm.reset()
+    this.loginForm.reset()
     this.displayStyle = 'none';
     this.displayStyle2 = 'block';
     this.signupForm = this.fb.group({

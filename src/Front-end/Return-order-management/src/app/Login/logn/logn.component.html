@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="modal-body p-5 pt-0">
-                    <form [formGroup]="loginForm">
+                    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
                             <label for="floatingInput">Email address</label>
@@ -33,13 +33,13 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" (click)="submitForm()">
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" >
               Sign in
             </button>
+          </form>
                         <button class="btn btn-link" (click)="createAccount()">
-              <small class="text-muted">Create an Account</small>
+              <small type="button"class="text-muted">Create an Account</small>
             </button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="modal-body p-5 pt-0">
-                    <form [formGroup]="signupForm">
+                    <form [formGroup]="signupForm" (ngSubmit)="submitNewForm()">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
                             <label for="floatingInput">Email address</label>
@@ -71,8 +71,8 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
-                            <label for="floatingPassword">Password</label>
+                            <input type="password" class="form-control rounded-3" id="floatingPassword2" placeholder="Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                            <label for="floatingPassword2">Password</label>
                             <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
                                 <div *ngIf="f['password'].errors['required']">
                                     Password is required
@@ -83,10 +83,10 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" formControlName="confirmPassword" [ngClass]="{
+                            <input type="password" class="form-control rounded-3" id="floatingConPassword" placeholder="Password" formControlName="confirmPassword" [ngClass]="{
                   'is-invalid': submitted && f['confirmPassword'].errors
                 }" />
-                            <label for="floatingPassword">Confirm Password</label>
+                            <label for="floatingConPassword">Confirm Password</label>
                             <div class="invalid-feedback" *ngIf="submitted && f['confirmPassword'].errors">
                                 <div *ngIf="f['confirmPassword'].errors['required']">
                                     Password is required
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" (click)="submitNewForm()">
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" >
               Sign up
             </button>
                     </form>
