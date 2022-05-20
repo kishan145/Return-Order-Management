@@ -88,8 +88,10 @@ export class HomeComponent implements OnInit {
     return this.step1Form.controls;
   }
 
-  save(){
-    this.homeService.updateStatus(this.step2Form.controls['status'].value,this.step2Form.controls['requestId'].value).subscribe((res) => {
+  save() {
+    const status = { status: this.step2Form.controls['status'].value }
+    
+    this.homeService.updateStatus(status,this.step2Form.controls['requestId'].value).subscribe((res) => {
       if(res){
         alert("Response Updated Successfully");
       }

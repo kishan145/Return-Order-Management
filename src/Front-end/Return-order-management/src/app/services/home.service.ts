@@ -15,7 +15,7 @@ export class HomeService {
     return this.http.post('http://localhost:5000/api/ComponentProc', body, { headers} );
   }
 
-  updateStatus(status :String,requestId:Number): Observable<any>{
+  updateStatus(status :any,requestId:Number): Observable<any>{
     const headers= {'Content-type': 'application/json'}
     return this.http.patch(`http://localhost:5000/api/ComponentProc/${requestId}`, status, {headers});
   }
