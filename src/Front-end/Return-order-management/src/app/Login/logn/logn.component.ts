@@ -29,10 +29,14 @@ export class LognComponent implements OnInit {
     this.displayStyle = 'block'
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required,Validators.minLength(8)]
   })
   }
   submitForm(){
+    this.submitted = true
+    if(this.signupForm.invalid){
+      return
+    }
     this.payload = {username: this.loginForm.value.username, password: this.loginForm.value.password}
     this.loginService.login(this.payload).subscribe((res)=> {
       if(res){
@@ -42,6 +46,7 @@ export class LognComponent implements OnInit {
             isLoggedIn:this.isLoggedIn
           }
         })
+        this.submitted =false
       }
     })
   }
@@ -91,6 +96,9 @@ export class LognComponent implements OnInit {
   }
 
   get f(){
+    if (this.oldUser) {
+      return this.loginForm.controls;
+    }
     return this.signupForm.controls;
   }
 
