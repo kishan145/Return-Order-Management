@@ -47,21 +47,7 @@ export class HomeComponent implements OnInit {
       deliveryCharges: ['', Validators.required],
       dateOfDelivery: ['', Validators.required]
   })
-// const abc = {
-//   "requestId": 24,
-//   "totalCharges": 300,
-//   "packageCharges": 50,
-//   "deliveryCharges": 100,
-//   "dateOfDelivery": "2022-05-21T00:52:57.6926309+05:30",
-//   "status": "Fulfill"
-// }
-// this.status = abc.status
-// Object.entries(abc).map(item => {
-//   this.step2Form.controls[item[0]].setValue(item[1])
-// })
 
-// this.readonly = false;
-    
   }
   proceedToNext(){
     this.submitted = true;
@@ -92,8 +78,12 @@ export class HomeComponent implements OnInit {
     const status = { status: this.step2Form.controls['status'].value }
     
     this.homeService.updateStatus(status,this.step2Form.controls['requestId'].value).subscribe((res) => {
-      if(res){
+      if (status.status === 'Fulfill') {
         alert("Response Updated Successfully");
+      } else {
+        alert("We are not processing your request,Thankyou for your response");
+        this.step1 = true;
+        this.submitted = false;
       }
     })
   }
