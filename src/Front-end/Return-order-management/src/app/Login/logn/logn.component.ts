@@ -82,7 +82,7 @@ export class LognComponent implements OnInit {
     this.signupForm = this.fb.group({
       username: ['',[Validators.required,Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['',[Validators.required]]
+      confirmPassword: ['',Validators.required]
       }, {validator: this.confirmPassword})
       console.log(this.signupForm.value, 'form')
   }

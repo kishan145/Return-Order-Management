@@ -12,7 +12,6 @@ import { HomeService } from 'src/app/services/home.service';
 export class HomeComponent implements OnInit {
   public user = false;
   public step1 = false;
-  public step2 = false;
   public step1Form: FormGroup = new FormGroup({});
   public step2Form: FormGroup = new FormGroup({});
   public readonly = true;
@@ -80,8 +79,7 @@ export class HomeComponent implements OnInit {
       }
     })
    
-    this.step1 = false;
-    this.step2 = true;
+    this.step1 = true;
     this.step1Form.reset();
     this.submitted = false;
   }
@@ -91,7 +89,11 @@ export class HomeComponent implements OnInit {
   }
 
   save(){
-
+    this.homeService.updateStatus(this.step2Form.controls['status'].value,this.step2Form.controls['requestId'].value).subscribe((res) => {
+      if(res){
+        alert("Response Updated Successfully");
+      }
+    })
   }
 
   close(){
