@@ -26,20 +26,20 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.step1Form = this.fb.group({
-      name: ['', Validators.required],
-      contactNumber: ['', Validators.required,Validators.minLength(10)],
-      status: ['', Validators.required],
-      componentName: ['', Validators.required],
-      quantity: ['', Validators.required],
-      description: ['', Validators.required],
-      componentType: ['', Validators.required],
+      name: ['', [Validators.required]],
+      contactNumber: ['', [Validators.required,Validators.minLength(10)]],
+      status: ['', [Validators.required]],
+      componentName: ['', [Validators.required]],
+      quantity: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      componentType: ['', [Validators.required]],
   })
   this.step2Form = this.fb.group({
-    requestId: ['', Validators.required],
-    totalCharges: ['', Validators.required],
-    status: ['', Validators.required],
-    packageCharges: ['', Validators.required],
-    deliveryCharges: ['', Validators.required],
+    requestId: ['', [Validators.required]],
+    totalCharges: ['', [Validators.required]],
+    status: ['', [Validators.required]],
+    packageCharges: ['', [Validators.required]],
+    deliveryCharges: ['', [Validators.required]],
     dateOfDelivery: ['', [Validators.required]]
 })
 // const abc = {
@@ -71,7 +71,6 @@ export class HomeComponent implements OnInit {
     this.homeService.sendOrderDetails(this.step1Form.value).subscribe((res) => {
       if(res){
         this.status = res.status;
-        this.step1Form.reset();
         Object.entries(res).map(item => {
           this.step2Form.controls[item[0]].setValue(item[1])
         })
@@ -79,6 +78,8 @@ export class HomeComponent implements OnInit {
       }
     })
     this.step1 = false;
+    this.step1Form.reset();
+    this.submitted = true;
   }
 
   get f(){

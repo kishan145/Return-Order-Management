@@ -28,8 +28,8 @@ export class LognComponent implements OnInit {
   ngOnInit(): void {
     this.displayStyle = 'block'
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required,Validators.minLength(8)]
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required,Validators.minLength(8)]]
   })
   }
   submitForm(){
