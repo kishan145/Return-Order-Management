@@ -34,7 +34,6 @@ namespace ComponentProcessing.API.Repository
         {
    
             var comType = componentProcessing.componentType;
-            var quantity = componentProcessing.quantity;
 
             if (comType == "Integral")
             {
@@ -46,6 +45,7 @@ namespace ComponentProcessing.API.Repository
                 componentProcessing.totalCharges =  300;
                 componentProcessing.dateOfDelivery = DateTime.Now.AddDays(2);
             }
+            componentProcessing.status = "Unfulfill";
             _db.componentProcessings.Add(componentProcessing);
             return Save();
         }
@@ -71,9 +71,12 @@ namespace ComponentProcessing.API.Repository
             return _db.SaveChanges() >= 0 ? true : false;
         }
 
-        public bool UpdateComponentProcessing(ComponentProcessingModel componentProcessing)
+        public bool UpdateComponentProcessing(int cpId, ComponentProcessingModel componentProcessing)
         {
-            _db.componentProcessings.Update(componentProcessing);
+
+            var getData = _db.componentProcessings.Where(record => record.requestId == cpId).FirstOrDefault();
+            getData.status = componentProcessing.status;
+            _db.componentProcessings.Update(getData);
             return Save();
         }
     }

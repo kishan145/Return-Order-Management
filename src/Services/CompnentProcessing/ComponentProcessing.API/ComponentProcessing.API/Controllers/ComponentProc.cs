@@ -82,18 +82,20 @@ namespace ComponentProcessing.API.Controllers
                 ModelState.AddModelError("",$"Something went wrong when saving the record {componentProcessingObj.name}");
                 return StatusCode(500, ModelState);
             }
-            return CreatedAtRoute("GetComponentProcessing", new { cpId = componentProcessingObj.requestId }, componentProcessingObj);
+
+            var componentProcessingObjResponse = _mapper.Map<ComponentProcessingModelDto>(componentProcessingObj); 
+            return Ok(componentProcessingObjResponse);
         }
 
         [HttpPatch("{cpId:int}", Name = "UpdateComponentProcessing")]
-        public IActionResult UpdateComponentProcessing(int cpID,[FromBody] UpdateDto compDto)
+        public IActionResult UpdateComponentProcessing(int cpID, [FromBody] UpdateDto compDto)
         {
-            if (compDto == null || cpID != compDto.requestId)
+            if (compDto == null)
             {
                 return BadRequest(ModelState);
             }
             var componentProcessingObj = _mapper.Map<ComponentProcessingModel>(compDto);
-            if (!_cpRepo.UpdateComponentProcessing(componentProcessingObj))
+            if (!_cpRepo.UpdateComponentProcessing( cpID,componentProcessingObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when updating the record {componentProcessingObj.name}");
                 return StatusCode(500, ModelState);
