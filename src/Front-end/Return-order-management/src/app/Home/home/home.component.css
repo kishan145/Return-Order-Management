@@ -1,3 +1,14 @@
-.val{
-color: #DC3545;
+.val {
+    color: #DC3545;
+}
+
+.note {
+    color: #DC3545;
+    display: flex;
+    justify-content: center;
+}
+
+p {
+    display: block;
+    justify-content: center;
 }

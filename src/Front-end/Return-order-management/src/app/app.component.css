@@ -4,3 +4,13 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.logo {
+    color: #ffc107;
+    border-color: #ffc107;
+    padding-right: 50px;
+}
+
+a {
+    color: #f4dc92!important;
+}

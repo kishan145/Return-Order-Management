@@ -1,3 +1,10 @@
+<ng-container *ngIf="!user">
+    <h3 class="note">Kindly, login for the component processing details</h3>
+    <p>
+        Return order management is the website which is used to raise a request for repair and replacement of the component. User have to login and the complete the form details and submit the form after getting the processing charge, package and delivery charges
+        and expected date of delivery change status to fulfill for processing the otherwise it will go in reject state.
+    </p>
+</ng-container>
 <ng-container *ngIf="user">
     <div class="mb-5 p-4 bg-white shadow-sm">
         <ng-container *ngIf="step1">
