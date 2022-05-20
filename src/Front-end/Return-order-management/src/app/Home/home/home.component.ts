@@ -25,23 +25,20 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.user = history.state.isLoggedIn
+    if (this.user){
+      this.step1 = true;
+      
+    }
     this.step1Form = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', Validators.required],
       contactNumber: ['', [Validators.required,Validators.minLength(10)]],
-      status: ['', [Validators.required]],
-      componentName: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      componentType: ['', [Validators.required]],
+      status: ['', Validators.required],
+      componentName: ['', Validators.required],
+      quantity: ['', Validators.required],
+      description: ['', Validators.required],
+      componentType: ['', Validators.required],
   })
-  this.step2Form = this.fb.group({
-    requestId: ['', [Validators.required]],
-    totalCharges: ['', [Validators.required]],
-    status: ['', [Validators.required]],
-    packageCharges: ['', [Validators.required]],
-    deliveryCharges: ['', [Validators.required]],
-    dateOfDelivery: ['', [Validators.required]]
-})
 // const abc = {
 //   "requestId": 24,
 //   "totalCharges": 300,
@@ -56,11 +53,7 @@ export class HomeComponent implements OnInit {
 // })
 
 // this.readonly = false;
-    this.user = history.state.isLoggedIn
-    if (this.user){
-      this.step1 = true;
-      
-    }
+    
   }
   proceedToNext(){
     this.submitted = true;
@@ -77,6 +70,14 @@ export class HomeComponent implements OnInit {
         this.step2Form.controls['dateOfDelivery'].setValue(this.datePipe.transform(Date.now(),'yyyy-MM-dd'))
       }
     })
+    this.step2Form = this.fb.group({
+      requestId: ['', Validators.required],
+      totalCharges: ['', Validators.required],
+      status: ['', Validators.required],
+      packageCharges: ['', Validators.required],
+      deliveryCharges: ['', Validators.required],
+      dateOfDelivery: ['', Validators.required]
+  })
     this.step1 = false;
     this.step1Form.reset();
     this.submitted = true;

@@ -34,7 +34,7 @@ export class LognComponent implements OnInit {
   }
   submitForm(){
     this.submitted = true
-    if(this.signupForm.invalid){
+    if(this.loginForm.invalid){
       return
     }
     this.payload = {username: this.loginForm.value.username, password: this.loginForm.value.password}
@@ -69,9 +69,9 @@ export class LognComponent implements OnInit {
     })
   }
   createAccount() {
+    this.oldUser = false;
     this.loginForm.reset()
     this.displayStyle = 'none';
-    this.oldUser = false;
     this.displayStyle2 = 'block';
     this.signupForm = this.fb.group({
       username: ['',[Validators.required,Validators.email]],

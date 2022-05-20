@@ -19,7 +19,7 @@
             </div>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password"formControlName='password'[ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+              <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password"formControlName='password' [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
               <label for="floatingPassword">Password</label>
               <div class="invalid-feedback" *ngIf="submitted && f['password'].errors">
                 <div *ngIf="f['password'].errors['required']">Password is required</div>
