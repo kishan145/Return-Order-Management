@@ -1,4 +1,13 @@
-button {
-    /* color: #ffc107;
-    background-color: black; */
+.signin-btn {
+    color: #ffc107;
+    background-color: black;
+}
+
+.signup {
+    color: #ffc107;
+    background-color: black;
+}
+
+.text-muted {
+    color: black !important;
 }

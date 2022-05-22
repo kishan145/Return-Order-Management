@@ -8,7 +8,7 @@
 <ng-container *ngIf="user">
     <div class="mb-5 p-4 bg-white shadow-sm">
         <ng-container *ngIf="step1">
-            <h5>Processing Details</h5>
+            <h5 class="heading">Processing Details</h5>
             <div class="modal modal-sheet position-static d-block py-5" tabindex="-1" role="dialog" id="modalSheet">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content rounded-4 shadow">
@@ -109,8 +109,8 @@
                         </form>
                     </div>
                     <div class="modal-footer flex-column border-top-0">
-                        <button type="button" class="btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="proceedToNext()">
-                Proceed to Next Step
+                        <button type="button" class="next-btn btn btn-lg btn-primary w-100 mx-0 mb-2" (click)="proceedToNext()">
+                Next
               </button>
                     </div>
                 </div>
@@ -119,6 +119,7 @@
     </ng-container>
 
     <ng-container *ngIf="!step1">
+        <h5 class="heading">Packageing & delivery charges</h5>
         <div class="modal modal-sheet position-static d-block py-5" tabindex="-1" role="dialog" id="modalSheet">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content rounded-4 shadow">
@@ -173,14 +174,14 @@
                                 </div>
                             </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2">
-                  Save changes
+                    <button type="submit" class="save-btn btn btn-lg btn-primary w-100 mx-0 mb-2">
+                  Save
                 </button>
                     </form>
                 </div>
                 <div class="modal-footer flex-column border-top-0">
-                    <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal" (click)="close()">
-                Close
+                    <button type="button" class="cancel-btn btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal" (click)="close()">
+                Cancel
               </button>
                 </div>
             </div>
